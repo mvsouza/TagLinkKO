@@ -182,7 +182,8 @@ function ObjetosIndexados() {
 		alert(data.NotEdit+" - "+data.NotEdit);
 	});
 }
-// Activates knockout.js
+var appId,jsKey;
+$(document).ready(function() {
 ko.bindingHandlers.tooltip = {
     init: function (element, valueAccessor) {
         var local = ko.utils.unwrapObservable(valueAccessor()),
@@ -202,8 +203,6 @@ ko.bindingHandlers.tooltip = {
         trigger: "hover"
     }
 }
-var appId,jsKey;
-$(document).ready(function() {
 	chrome.storage.sync.get({
     	appId: '',
     	jsKey: ''

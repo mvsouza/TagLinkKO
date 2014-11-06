@@ -1,6 +1,6 @@
 {
     "name": "TagLink",
-    "version": "0.0.4",
+    "version": "0.0.6",
     "manifest_version": 2,
     "description": "Tag your bookmarks",
     "icons": {
@@ -30,7 +30,8 @@
         {
             "matches": [
                 "http://*/*",
-                "https://*/*"
+                "https://*/*",
+                "**/*"
             ],
             "js": [
                 "scripts/contentscript.js"
@@ -45,13 +46,15 @@
         "storage",
         "http://*/*",
         "https://*/*",
-    "bookmarks",
-    "http://*.parsecdn.com/",
-    "http://*.parse.com/",
-    "https://*.parsecdn.com/",
-    "https://*.parse.com/"
+        "bookmarks",
+        "http://*.parsecdn.com/",
+        "http://*.parse.com/",
+        "https://*.parsecdn.com/",
+        "https://*.parse.com/"
     ],
-  "sandbox": {
-     "pages": ["index.html"]
-  }
+    "sandbox": {
+        "pages": [
+            "index.html"
+        ]
+    }
 }

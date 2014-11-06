@@ -1,6 +1,11 @@
 {
   "name": "taglinkko",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "knockout": "~3.2.0",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.0",
+    "jqueryui": "~1.11.2"
+  },
   "devDependencies": {}
 }

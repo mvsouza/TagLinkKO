@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <title>TagIt</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/jquery-ui.css">
+  </head>
+    <body style="background-color:solid white;padding:0;width:300px;padding:10px;">
+        <button data-bind="click: CadastrarObjeto" class="btn" style="margin: 5px;">+</button>
+            <div>
+                <ul style="list-style-type: none;">
+                    <div style="overflow:hidden;width:280px;text-overflow: ellipsis;" data-bind="text: CadastrarNomeObjeto">
+                    </div>
+                    <!-- ko foreach: CadastradasCategorias-->
+                    <li> 
+                        <span data-bind="text: $data"></span>
+                    </li>
+                    <!-- /ko -->
+                    <li>
+                    <input data-bind="value: CadastrarNomeCategoria" type="text" placeholder="Nome da categoria" ></input>
+                    <button class="btn" data-bind="click: CadastrarCategoria">+</button>    
+                    </li>
+                </ul
+            </div>  
+        <div>
+            <div>
+                <ul style="margin: 5px;">
+                    <!-- ko foreach: CategoriasSelecionadas-->
+                    <li style="display:inline-block">
+                        <button data-bind="text: $data + '*', click: $parent.DeSelecionarCategoria"></button>
+                    </li>
+                    <!-- /ko -->
+                    <!-- ko foreach: Categoria-->
+                    <li style="display:inline-block">
+                        <button data-bind="text: $data, click: $parent.SelecionarCategoria"></button>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+            <ul data-bind="foreach: ObjetosSelecionados" style="width:200px;list-style-type: none;margin: 0;">
+                <li>                
+                        <div style="width: 300px;" data-bind="tooltip: { title: nome, placement: 'bottom' }" >
+                            <a style="width:227px;display:inline-block;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;" 
+                                data-bind='attr:{ href: Referencia } ,text: nome' target="_blank">
+                            </a>
+                            <a data-bind="click: $parent.ShowEdit" class="btn btn-info btn-mini"><i class="icon-white icon-pencil"></i></a>
+                            <a data-bind="click: $parent.ExcluirObjeto" class="btn btn-danger btn-mini"><i class="icon-white icon-trash"></i></a>
+                        </div>          
+                        <ul data-bind="foreach: Categorias" style="display:none;">
+                            <li> 
+                                <span data-bind="text: $data"></span>
+                            </li>
+                        </ul>
+                        </hgroup>
+                </li>
+            </ul>   
+        </div>
+        <div id="dialog-confirm2" title="Deletar Indexador" hidden>
+            <p>
+                Deseja realmente deletar esse objeto?
+            </p>
+        </div>
+        <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.1.6.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery-ui.js"></script>
+        <script type="text/javascript" src="scripts/linq.min.js"></script>
+        <script type="text/javascript" src="scripts/knockout-2.2.1.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/popup.js"></script>
+    </body>
+</html>

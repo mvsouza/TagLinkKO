@@ -17,7 +17,7 @@ function ObjetosIndexados() {
     var self = this;
 	var data;
 	
-    Parse.initialize("Y3nl4D9DhqMjBzppKU6WnPjwoN6ruFm34OrKiXCI", "azCnSVhqEUTbega3Arb6LW8go6Lq1RleyhOhz0AA");
+    Parse.initialize(appId, jsKey);
     var Links = Parse.Object.extend("Links");
     self.Save = function (link, callback, undo){
         var l = new Links();
@@ -202,7 +202,16 @@ ko.bindingHandlers.tooltip = {
         trigger: "hover"
     }
 }
+var appId,jsKey;
 $(document).ready(function() {
-window.vm = new ObjetosIndexados();
-ko.applyBindings(vm);}
+	chrome.storage.sync.get({
+    	appId: '',
+    	jsKey: ''
+  		}, function(items) {
+    		appId = items.appId;
+    		jsKey = items.jsKey;
+			window.vm = new ObjetosIndexados();
+			ko.applyBindings(vm);
+		});
+	}
 );

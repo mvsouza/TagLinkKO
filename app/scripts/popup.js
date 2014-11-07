@@ -135,7 +135,7 @@ function ObjetosIndexados() {
             var objetoAtual = self.Objeto()[i];
             if (Enumerable.From(self.CategoriasSelecionadas()).All(function (categoria) {
                 return Enumerable.From(objetoAtual.Categorias).Any(function (cat) {
-                    return cat == categoria;
+                    return cat.toUpperCase() == categoria.toUpperCase();
                 });
             })) {
                 objestosSelecionados.push(objetoAtual);
@@ -150,7 +150,7 @@ function ObjetosIndexados() {
             for (var j = 0;objetoAtual.Categorias && j < objetoAtual.Categorias.length; j++) {
                 var categoria = objetoAtual.Categorias[j];
                 if (!Enumerable.From(categorias).Any(function (cat) {
-                    return cat == categoria;
+                    return cat.toUpperCase() == categoria.toUpperCase();
                 }))
                 //	&& !Enumerable.From(self.CategoriasSelecionadas()).Any(function (cat) {
                 //    return cat == categoria;})

@@ -36,7 +36,7 @@ function ObjetosIndexados() {
             success: function(results) {
                 self.Objeto(results.map(function( v, i){
                 	return { nome:v.get("nome"),Referencia:v.get("Referencia"),Categorias:v.get("Categorias"),Id:v.id};
-                }));//tesste = results;
+                }));
             },
             error: function(model, error) {
             }
@@ -82,11 +82,14 @@ function ObjetosIndexados() {
     self.CadastrarNomeObjeto = ko.observable();
     self.CadastradasCategorias = ko.observableArray([]);
     self.CadastrarNomeCategoria = ko.observable();
+    self.DeletarCategoria = function(v){
+    	self.CadastradasCategorias.remove(v)
+    };
     self.Referencia = ko.observable();
-		chrome.tabs.getSelected(null,function(tab) {
+	chrome.tabs.getSelected(null,function(tab) {
 		self.CadastrarNomeObjeto(tab.title);
 		self.Referencia(tab.url);
-		});
+	});
 	
     self.CadastrarCategoria = (function () {
         self.CadastradasCategorias.push(self.CadastrarNomeCategoria());
@@ -148,15 +151,22 @@ function ObjetosIndexados() {
                 var categoria = objetoAtual.Categorias[j];
                 if (!Enumerable.From(categorias).Any(function (cat) {
                     return cat == categoria;
-                }) && !Enumerable.From(self.CategoriasSelecionadas()).Any(function (cat) {
-                    return cat == categoria;
-                })) {
+                }))
+                //	&& !Enumerable.From(self.CategoriasSelecionadas()).Any(function (cat) {
+                //    return cat == categoria;})
+                {
                     categorias.push(categoria);
                 }
             }
         }
         return categorias;
     });
+    function updateChosen(){
+    	setTimeout(function(){$(".chosen-select").trigger("chosen:updated");},500);
+    }
+    self.Objeto.subscribe(updateChosen);
+    self.Categoria.subscribe(updateChosen);
+    self.CategoriasSelecionadas.subscribe(updateChosen);
 	self.ExcluirObjeto = (function(data)
     {
 	$( "#dialog-confirm2" ).dialog({
@@ -207,6 +217,7 @@ ko.bindingHandlers.tooltip = {
     	appId: '',
     	jsKey: ''
   		}, function(items) {
+  			$(".chosen-select").chosen({width: "100%"});
     		appId = items.appId;
     		jsKey = items.jsKey;
 			window.vm = new ObjetosIndexados();

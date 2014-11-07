@@ -4,18 +4,20 @@
     <title>TagIt</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="styles/chosen.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/jquery-ui.css">
   </head>
     <body style="background-color:solid white;padding:0;width:300px;padding:10px;">
         <button data-bind="click: CadastrarObjeto" class="btn" style="margin: 5px;">+</button>
             <div>
-                <ul style="list-style-type: none;">
-                    <div style="overflow:hidden;width:280px;text-overflow: ellipsis;" data-bind="text: CadastrarNomeObjeto">
+                <div style="overflow:hidden;width:280px;text-overflow: ellipsis;" data-bind="text: CadastrarNomeObjeto">
                     </div>
+                <ul style="list-style-type: none;">
+                    
                     <!-- ko foreach: CadastradasCategorias-->
                     <li> 
-                        <span data-bind="text: $data"></span>
+                        <span data-bind="text: $data"></span><span data-bind="click: $parent.DeletarCategoria" style="float:right;color:red;">x</span>
                     </li>
                     <!-- /ko -->
                     <li>
@@ -26,18 +28,7 @@
             </div>  
         <div>
             <div>
-                <ul style="margin: 5px;">
-                    <!-- ko foreach: CategoriasSelecionadas-->
-                    <li style="display:inline-block">
-                        <button data-bind="text: $data + '*', click: $parent.DeSelecionarCategoria"></button>
-                    </li>
-                    <!-- /ko -->
-                    <!-- ko foreach: Categoria-->
-                    <li style="display:inline-block">
-                        <button data-bind="text: $data, click: $parent.SelecionarCategoria"></button>
-                    </li>
-                    <!-- /ko -->
-                </ul>
+                <select multiple data-bind="options: Categoria, selectedOptions: CategoriasSelecionadas" class="chosen-select"></select>
             </div>
             <ul data-bind="foreach: ObjetosSelecionados" style="width:200px;list-style-type: none;margin: 0;">
                 <li>                
@@ -68,6 +59,7 @@
         <script type="text/javascript" src="scripts/linq.min.js"></script>
         <script type="text/javascript" src="scripts/knockout-2.2.1.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/chosen.jquery.js"></script>
         <script type="text/javascript" src="scripts/popup.js"></script>
     </body>
 </html>

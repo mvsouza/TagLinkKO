@@ -30,8 +30,7 @@
         {
             "matches": [
                 "http://*/*",
-                "https://*/*",
-                "**/*"
+                "https://*/*"
             ],
             "js": [
                 "scripts/contentscript.js"

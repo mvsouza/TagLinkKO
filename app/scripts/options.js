@@ -26,7 +26,7 @@ function restore_options() {
     jsKey: ''
   }, function(items) {
     document.getElementById('appId').value = items.appId;
-    document.getElementById('jsKey').checked = items.jsKey;
+    document.getElementById('jsKey').value = items.jsKey;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);

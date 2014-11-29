@@ -194,32 +194,37 @@ function ObjetosIndexados() {
 }
 var appId,jsKey;
 $(document).ready(function() {
-ko.bindingHandlers.tooltip = {
-    init: function (element, valueAccessor) {
-        var local = ko.utils.unwrapObservable(valueAccessor()),
-            options = {};
-
-        ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-        ko.utils.extend(options, local);
-
-        $(element).tooltip(options);
-
-        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-            $(element).tooltip("destroy");
-        });
-    },
-    options: {
-        placement: "right",
-        trigger: "hover"
+    ko.bindingHandlers.tooltip = {
+        init: function (element, valueAccessor) {
+            var local = ko.utils.unwrapObservable(valueAccessor()),
+                options = {};
+    
+            ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+     
+            $(element).tooltip(options);
+    
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                $(element).tooltip("destroy");
+            });
+        },
+        options: {
+            placement: "right",
+            trigger: "hover"
+        }
     }
-}
 	chrome.storage.sync.get({
-    	appId: '',
-    	jsKey: ''
+    	selected: '',
+    	jsConfigs: ''
   		}, function(items) {
+            console.log(items);
+            var item = Enumerable.From(items.jsConfigs).First(function(a){
+                return a.appId == items.selected;
+            });
   			$(".chosen-select").chosen({width: "100%"});
-    		appId = items.appId;
-    		jsKey = items.jsKey;
+    		appId = item.appId;
+    		jsKey = item.jsKey;
+            console.log(appId);
+            console.log(jsKey);
 			window.vm = new ObjetosIndexados();
 			ko.applyBindings(vm);
 		});

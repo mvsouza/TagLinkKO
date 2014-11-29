@@ -6,19 +6,33 @@
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css styles/main.css -->
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/bootstrap-responsive.min.css">
         <link href="styles/main.css" rel="stylesheet">
         <!-- endbuild -->
     </head>
     <body>
+        <div>
+            <h3>Parse persistence configuration</h3>
+        <!-- ko foreach: JsConfigs-->
+            <label><input type="radio" data-bind="value: appId,checked: $parent.Selected">
+                <span data-bind="text: label"></span>
+                <span style="color:red" data-bind="click: $parent.removeItem">delete</span>
+            </label>
+        <!-- /ko -->
+        <div>Create a new <a href="https://www.parse.com/apps/new">data collection</a>, and save it's access key.</div>
+        </div>
         <label>
-            <input type="text" id="appId"/>
+            <input type="text" data-bind="value: Label" placeholder="Label"/>
         </label>
         <label>
-            <input type="text" id="jsKey"/>
+            <input type="text" data-bind="value: AppKey" placeholder="AppKey"/>
+        </label>
+        <label>
+            <input type="text" data-bind="value: JsKey" placeholder="JsKey"/>
         </label>
 
-    <div id="status"></div>
-    <button id="save">Save</button>
+        <button data-bind="click: saveOptions">Save</button>
                 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
@@ -26,6 +40,11 @@
         <!-- endbuild -->
 
         <!-- build:js scripts/options.js -->
+        <script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery-ui.js"></script>
+        <script type="text/javascript" src="scripts/linq.min.js"></script>
+        <script type="text/javascript" src="scripts/knockout-2.2.1.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
         <script src="scripts/options.js"></script>
         <!-- endbuild -->
     </body>
